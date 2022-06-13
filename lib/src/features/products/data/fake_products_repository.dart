@@ -14,12 +14,12 @@ class FakeProductsRepository {
   }
 
   Future<List<Product>> fetchProductsList() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     return Future.value(_products);
   }
 
   Stream<List<Product>> watchProductsList() async* {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     yield _products;
   }
 
@@ -44,6 +44,11 @@ final productsListStreamProvider = StreamProvider<List<Product>>((ref) {
 final productsListFutureProvider = FutureProvider<List<Product>>((ref) {
   final productRepository = ref.watch(productRepositoryProvider);
   return productRepository.fetchProductsList();
+});
+
+final productProvider = StreamProvider.family<Product?, String>((ref, id) {
+  final productRepository = ref.watch(productRepositoryProvider);
+  return productRepository.watchProduct(id);
 });
 
 /*
