@@ -31,6 +31,20 @@ class FakeProductsRepository {
 }
 
 // Create a provider instance for the repository - Similar to creating a Singleton
+// Note that this is a provider of type `FakeProductsRepository`
+// and we can create a provider of any type in dart.
 final productRepositoryProvider = Provider<FakeProductsRepository>((ref) {
   return FakeProductsRepository.instance;
 });
+
+/*
+   How to Create Providers
+    1. Declare as global variable: 
+       - can be accessed from anywhere in the app
+       - e.g. productRepositoryProvider
+    2. Specify the provider as a Provider<T>
+       - T is the type of the provider
+       - e.g. Provider<FakeProductsRepository>
+    3. Implement the body of the provider
+       - e.g. return FakeProductsRepository.instance
+*/
