@@ -29,3 +29,8 @@ class FakeProductsRepository {
         .map((products) => products.firstWhere((product) => product.id == id));
   }
 }
+
+// Create a provider instance for the repository - Similar to creating a Singleton
+final productRepositoryProvider = Provider<FakeProductsRepository>((ref) {
+  return FakeProductsRepository.instance;
+});
