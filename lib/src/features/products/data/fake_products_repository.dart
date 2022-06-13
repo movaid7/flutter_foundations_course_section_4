@@ -34,6 +34,11 @@ final productRepositoryProvider = Provider<FakeProductsRepository>((ref) {
   return FakeProductsRepository();
 });
 
+final productsListStreamProvider = StreamProvider<List<Product>>((ref) {
+  final productRepository = ref.watch(productRepositoryProvider);
+  return productRepository.watchProductsList();
+});
+
 /*
    How to Create Providers
     1. Declare as global variable: 
